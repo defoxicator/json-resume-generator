@@ -82,7 +82,6 @@ def main():
 
     # data lists
 
-    profiles_list = []
     work_list = []
     education_list = []
     skills_list = []
@@ -102,29 +101,53 @@ def main():
     # }
     
 
-    # def more_entries(category = None):
+    def more_entries(category = None):
+        if category == None:
+            agree = input("Do you want to add another entry? (y/n) ")
+        else:
+            agree = input(f"Do you have anything to add to {category}? (y/n) ")
 
-    #     if category == None:
-    #         agree = input("Do you want to add another entry? (y/n) ")
-    #     else:
-    #         agree = input(f"Do you have anything to add to {category}? (y/n) ")
+        if agree.lower() == "y" or agree.lower() == "yes":
+            return True
+        else:
+            return False
 
-    #     if agree.lower() == "y" or agree.lower() == "yes":
-    #         return True
-    #     else:
-    #         return category
+    def listed_content(name, category):
+        list_cont = []
 
-    # def entry(name, dict):
-    #     name.append(dict)
+        if more_entries(name) == True:
+            list_cont.append(str(input(f'Input one of your {name}: ')))
+        
+            while more_entries() == True:
+                list_cont.append(str(input(f'Input one of your {name}: ')))
+
+        category.update({name: list_cont})
+
+    ### CATEGORY UPDATE?!
     
-    # def dict_values(template, section):
-    #     section = template.copy()
+    def single_section(list):
+        template_copy = template.copy()
 
-    #     for k, v in section.items():
-    #         section[k] = str(input(v))
- 
-    #     print("section", section)
-    #     return section
+        for k, v in template_copy.items():
+            template_copy[k] = str(input(template[k]))
+            
+        list.append(template_copy)
+
+    def section(category, names):
+        if more_entries(category) == True:
+            list = []
+            single_section(list)
+            for name in names:
+                listed_content(category, name)
+            
+            while more_entries() == True:
+                single_section(list)
+
+            if category == "profiles":
+                basics.update({"profiles": list})
+                resume.update({"basics": basics})
+            else:
+                resume.update({category: list})
 
     print("""
     Welcome to CV Builder.
@@ -133,20 +156,31 @@ def main():
     templates = [basics_dict, location_dict, profile_dict, work_dict, education_dict, skills_dict, languages_dict, interests_dict, projects_dict]
     
     resume = {}
+    basics = {}
 
     for template in templates:
-        template_copy = template.copy()
-        basics = {}
 
         if template == basics_dict:
+            template_copy = template.copy()
+
             for k, v in template_copy.items():
-                template_copy[k] = str(input(v))
+                template_copy[k] = str(input(template[k]))
                 basics.update(template_copy)
 
-        print(basics)
+        if template == location_dict:
+            template_copy = template.copy()
 
+            for k, v in template_copy.items():
+                template_copy[k] = str(input(template[k]))
+                basics.update({"location": template_copy})
         
-        resume.update(template_copy)
+        if template == profile_dict:
+            section("profiles")
+
+        if template == work_dict:
+            section("work")
+
+    print(resume)
 
 if __name__ == "__main__":
     main()
