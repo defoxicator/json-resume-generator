@@ -170,7 +170,8 @@ def main():
         else:
             section(k, v[1])
 
-    print(resume)
+    with open('resume.txt', 'w') as f:
+        f.write(str(resume))
 
 if __name__ == "__main__":
     main()
