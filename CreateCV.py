@@ -197,11 +197,5 @@ def main():
     
     save()
     
-    # with open('resume.txt', 'w') as f:
-    #     f.write(str(resume))
-
-    # json_object = json.dumps(resume, indent = 2) 
-    # print(json_object)
-
 if __name__ == "__main__":
     main()
