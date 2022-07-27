@@ -26,7 +26,7 @@ def main():
         "region": "Region: "
     }
  
-    profile_dict = {
+    profiles_dict = {
         "network": "Social network: ",
         "username": "Username: ",
         "url": "URL: "
@@ -39,7 +39,7 @@ def main():
         "startDate": "Start: ",
         "endDate": "End: ",
         "summary": "Description: ",
-        "hightlights": "Highlights: ",
+        "highlights": "Highlights: "
     }
 
     education_dict = {
@@ -78,70 +78,50 @@ def main():
       "type": "Type of project: "
     }
 
-    # keywords and highlights
+    high_keyw_list = ["highlights", "keywords", "courses"]
 
-    # data lists
-
-    work_list = []
-    education_list = []
-    skills_list = []
-    languages_list = []
-    interests_list = []
-    projects_list = []
-
-    # resume template
-
-    # resume = {"basics": basics,
-    #     "work": work_list,
-    #     "education": education_list,
-    #     "skills": skills_list,
-    #     "languages": languages_list,
-    #     "interests": interests_list,
-    #     "projects": projects_list,
-    # }
-    
-
-    def more_entries(category = None):
-        if category == None:
-            agree = input("Do you want to add another entry? (y/n) ")
-        else:
-            agree = input(f"Do you have anything to add to {category}? (y/n) ")
+    def more_entries(category):
+        agree = input(f"Do you have anything to add to {category}? (y/n) ")
 
         if agree.lower() == "y" or agree.lower() == "yes":
             return True
         else:
             return False
 
-    def listed_content(name, category):
+    def listed_content(name):
         list_cont = []
 
         if more_entries(name) == True:
             list_cont.append(str(input(f'Input one of your {name}: ')))
         
-            while more_entries() == True:
+            while more_entries(name) == True:
                 list_cont.append(str(input(f'Input one of your {name}: ')))
 
-        category.update({name: list_cont})
-
-    ### CATEGORY UPDATE?!
+        return list_cont
     
-    def single_section(list):
+    def single_section(list, names):
         template_copy = template.copy()
 
         for k, v in template_copy.items():
-            template_copy[k] = str(input(template[k]))
+            if k not in high_keyw_list:
+                template_copy[k] = str(input(template[k]))
+            else:
+                continue
+        
+        if names:
+            for name in names:
+                template_copy.update({name: listed_content(name)})
+            
             
         list.append(template_copy)
 
-    def section(category, names):
+    def section(category, names = None):
         if more_entries(category) == True:
             list = []
-            single_section(list)
-            for name in names:
-                listed_content(category, name)
+            single_section(list, names)
             
-            while more_entries() == True:
-                single_section(list)
+            while more_entries(category) == True:
+                single_section(list, names)
 
             if category == "profiles":
                 basics.update({"profiles": list})
@@ -150,35 +130,45 @@ def main():
                 resume.update({category: list})
 
     print("""
-    Welcome to CV Builder.
+    Welcome to CV Builder. Let's build that JSON!
     """)
 
-    templates = [basics_dict, location_dict, profile_dict, work_dict, education_dict, skills_dict, languages_dict, interests_dict, projects_dict]
+    templates = [basics_dict, location_dict, profiles_dict, work_dict, education_dict, skills_dict, languages_dict, interests_dict, projects_dict]
     
+    templates_dict = {
+        "basics": (basics_dict, []),
+        "location": (location_dict, []),
+        "profiles": (profiles_dict, []),
+        "work": (work_dict, ["highlights"]),
+        "education": (education_dict, ["courses"]),
+        "skills": (skills_dict, ["keywords"]),
+        "languages": (languages_dict, []),
+        "interests": (interests_dict, ["keywords"]),
+        "projects": (projects_dict, ["highlights", "keywords"])      
+    }
+
     resume = {}
     basics = {}
+    
+    for k, v in templates_dict.items():
+        template = v[0]
 
-    for template in templates:
-
-        if template == basics_dict:
+        if k == "basics":
             template_copy = template.copy()
 
             for k, v in template_copy.items():
                 template_copy[k] = str(input(template[k]))
                 basics.update(template_copy)
 
-        if template == location_dict:
+        elif k == "location":
             template_copy = template.copy()
 
             for k, v in template_copy.items():
                 template_copy[k] = str(input(template[k]))
                 basics.update({"location": template_copy})
-        
-        if template == profile_dict:
-            section("profiles")
 
-        if template == work_dict:
-            section("work")
+        else:
+            section(k, v[1])
 
     print(resume)
 
