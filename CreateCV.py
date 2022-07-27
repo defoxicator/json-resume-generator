@@ -132,7 +132,7 @@ def main():
     def save():
         saved = 0
         while saved == 0:
-            if str(input("Do you want to save your resume? (y/n)")).lower() in ["y", "yes"]:
+            if str(input("Do you want to save your resume? (y/n) ")).lower() in ["y", "yes"]:
 
                 format = str(input("In which format? (txt/json) ")).lower()
                 if format in ["txt", ".txt", "text"]:
@@ -171,7 +171,7 @@ def main():
         "projects": (projects_dict, ["highlights", "keywords"])      
     }
 
-    if str(input("Do you want to include theme https://jsonresume.org/ theme? (y/n)")).lower() in ["y", "yes"]:
+    if str(input("Do you want to include theme https://jsonresume.org/ theme? (y/n) ")).lower() in ["y", "yes"]:
         theme_dict = {"meta": {"theme": str(input("Theme: "))}}
         resume.update(theme_dict)
 
@@ -196,6 +196,6 @@ def main():
             section(k, v[1])
     
     save()
-    
+
 if __name__ == "__main__":
     main()

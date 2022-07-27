@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "theme": "stackoverflow"
+  },
+  "basics": {
+    "name": "John Doe",
+    "label": "Software Developer",
+    "image": "https://sample.url.com",
+    "email": "johndoe@email.com",
+    "phone": "401201421",
+    "url": "https://sample.url.com",
+    "summary": "I want to work man!",
+    "location": {
+      "address": "Sample St.",
+      "postalCode": "909090",
+      "city": "Sample City",
+      "countryCode": "USA",
+      "region": "CA"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "John Doe",
+        "url": "https://linkedin.com/johndoe"
+      },
+      {
+        "network": "GitHub.com",
+        "username": "johndoe",
+        "url": "https://github.com/johndoe"
+      }
+    ]
+  },
+  "work": [
+    {
+      "company": "Sample company 1",
+      "url": "https://sample.company1.url.com",
+      "position": "Software Developer",
+      "startDate": "2020-01-01",
+      "endDate": "2022-01-01",
+      "summary": "I was creating software",
+      "highlights": [
+        "Software developed",
+        "Worked for 2 years"
+      ]
+    },
+    {
+      "company": "Sample company 2 ",
+      "url": "https://sample.company2.url.com",
+      "position": "Janitor",
+      "startDate": "2015-02-01",
+      "endDate": "2020-01-01",
+      "summary": "I was cleaning server room",
+      "highlights": [
+        "Git",
+        "Cleaning tools manager"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of Software",
+      "url": "https://develop.here.com",
+      "area": "Development",
+      "studyType": "Bachelor of Science",
+      "startDate": "2015-01-01",
+      "endDate": "2018-01-01",
+      "score": "4.0",
+      "courses": [
+        "DEV-0101 - C#"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Cleaning",
+      "level": "High",
+      "keywords": [
+        "Dust",
+        "Water"
+      ]
+    },
+    {
+      "name": "Software Development",
+      "level": "Medium",
+      "keywords": [
+        "C#",
+        "C++",
+        "CSS",
+        "Python"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "Native speaker"
+    }
+  ],
+  "interests": [
+    {
+      "name": "Cleaning code",
+      "keywords": [
+        "clean",
+        "code"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "CV Generator",
+      "description": "Generating CV in JSON!",
+      "highlights": [
+        "Python "
+      ],
+      "keywords": [
+        "Python"
+      ],
+      "entity": "entity",
+      "type": "application"
+    }
+  ]
+}
