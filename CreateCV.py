@@ -1,8 +1,5 @@
 # JSON CV Builder
 
-from click import edit
-
-
 def main():
     import json
 
@@ -77,13 +74,16 @@ def main():
       "entity": "Entity: ",
       "type": "Type of project: "
     }
-
+    
     high_keyw_list = ["highlights", "keywords", "courses"]
+
+    resume = {}
+    basics = {}
 
     def more_entries(category):
         agree = input(f"Do you have anything to add to {category}? (y/n) ")
 
-        if agree.lower() == "y" or agree.lower() == "yes":
+        if agree.lower() in ["y", "yes"]:
             return True
         else:
             return False
@@ -129,6 +129,30 @@ def main():
             else:
                 resume.update({category: list})
 
+    def save():
+        saved = 0
+        while saved == 0:
+            if str(input("Do you want to save your resume? (y/n)")).lower() in ["y", "yes"]:
+
+                format = str(input("In which format? (txt/json) ")).lower()
+                if format in ["txt", ".txt", "text"]:
+                    with open('resume.txt', 'w') as f:
+                        f.write(str(resume))
+                        saved = 1
+
+                elif format in ["json", ".json"]:
+                    with open('resume.json', 'w') as f:
+                        json_object = json.dumps(resume, indent = 2) 
+                        f.write(json_object)
+                        saved = 1
+
+                else:
+                    print("Wrong format")
+            
+            else:
+                saved = 1
+
+
     print("""
     Welcome to CV Builder. Let's build that JSON!
     """)
@@ -147,9 +171,10 @@ def main():
         "projects": (projects_dict, ["highlights", "keywords"])      
     }
 
-    resume = {}
-    basics = {}
-    
+    if str(input("Do you want to include theme https://jsonresume.org/ theme? (y/n)")).lower() in ["y", "yes"]:
+        theme_dict = {"meta": {"theme": str(input("Theme: "))}}
+        resume.update(theme_dict)
+
     for k, v in templates_dict.items():
         template = v[0]
 
@@ -169,9 +194,14 @@ def main():
 
         else:
             section(k, v[1])
+    
+    save()
+    
+    # with open('resume.txt', 'w') as f:
+    #     f.write(str(resume))
 
-    with open('resume.txt', 'w') as f:
-        f.write(str(resume))
+    # json_object = json.dumps(resume, indent = 2) 
+    # print(json_object)
 
 if __name__ == "__main__":
     main()
