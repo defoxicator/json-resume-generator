@@ -1,4 +1,4 @@
-# Text resume generator
+# Text JSON resume generator
 
 Put your resume into .json!
 
