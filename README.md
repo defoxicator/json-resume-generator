@@ -26,3 +26,7 @@ python3 CreateCV.py
 ```
 OR
 You can access the program on [repl.it](https://replit.com/@defoxicator/resume)
+
+### Known issues
+
+* Some jsonresume templates need the name of the company category changed from "company" to "name" in .json file if not displayed correctly on resume.
