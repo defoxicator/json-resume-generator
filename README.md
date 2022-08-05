@@ -22,7 +22,7 @@ You do not need to prepare the files in any special way.
 * Open command line
 * Write:
 ```
-python3 CreateCV.py
+python3 CreateResume.py
 ```
 OR
 You can access the program on [repl.it](https://replit.com/@defoxicator/resume)
